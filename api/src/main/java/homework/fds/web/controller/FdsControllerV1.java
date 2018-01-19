@@ -28,12 +28,12 @@ public class FdsControllerV1 {
     @GetMapping("fraud/{user_Id}")
     public FdsResponseV1 getMatchingFraudRules(@PathVariable(name = "user_Id") Long userId) {
 
-        List<FraudRule> fraudRuleList = fdsService.getFraudRules(userId);
+        List<FraudRule> detectedRuleList = fdsService.getFraudRules(userId);
 
         return FdsResponseV1.of()
                             .userId(userId)
-                            .fraud(!isEmpty(fraudRuleList))
-                            .rule(joinedRule(fraudRuleList))
+                            .fraud(!isEmpty(detectedRuleList))
+                            .rule(joinedRule(detectedRuleList))
                             .build();
     }
 
