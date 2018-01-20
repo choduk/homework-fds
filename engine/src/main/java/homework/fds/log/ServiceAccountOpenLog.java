@@ -6,7 +6,8 @@ import java.time.LocalDateTime;
  * @author choduk88@sk.com
  * @since 2018. 1. 20..
  */
-public class Log {
+public class ServiceAccountOpenLog {
     private LocalDateTime createDt;
     private Long userId;
+    private String account;
 }
