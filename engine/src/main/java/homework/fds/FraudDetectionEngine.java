@@ -2,6 +2,7 @@ package homework.fds;
 
 import homework.fds.core.Rule;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 
@@ -22,7 +23,7 @@ public class FraudDetectionEngine {
     public List<Rule> findMatchedRules(Long userId) {
 
         return rules.stream()
-                    .filter(rule -> rule.isMatch(userId))
+                    .filter(rule -> rule.isMatch(userId, LocalDateTime.now()))
                     .collect(toList());
     }
 }
