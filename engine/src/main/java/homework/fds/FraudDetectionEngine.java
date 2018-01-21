@@ -1,8 +1,8 @@
 package homework.fds;
 
-import homework.fds.core.Rule;
+import homework.fds.rule.Rule;
+import homework.fds.log.UserActionLog;
 
-import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 
@@ -20,10 +20,9 @@ public class FraudDetectionEngine {
         this.rules = rules;
     }
 
-    public List<Rule> findMatchedRules(Long userId) {
-
+    public List<Rule> findMatchedRules(List<UserActionLog> actionUserActionLogs) {
         return rules.stream()
-                    .filter(rule -> rule.isMatch(userId, LocalDateTime.now()))
+                    .filter(rule -> rule.isMatch(actionUserActionLogs))
                     .collect(toList());
     }
 }
