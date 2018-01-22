@@ -20,7 +20,7 @@ import static org.mockito.Mockito.when;
  * @author choduk88@sk.com
  * @since 2018. 1. 22..
  */
-public class KakaoPayRuleTest {
+public class KakaoPayRuleUnitTest {
 
     private Rule rule;
     private Condition condition;

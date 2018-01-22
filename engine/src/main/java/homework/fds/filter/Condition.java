@@ -20,5 +20,10 @@ public abstract class Condition {
         return isNull(next) ? filteredLogLsist : next.apply(filteredLogLsist);
     }
 
+    public Condition next(Condition next) {
+        this.next = next;
+        return next;
+    }
+
     protected abstract List<UserActionLog> filter(List<UserActionLog> userActionLogs);
 }
