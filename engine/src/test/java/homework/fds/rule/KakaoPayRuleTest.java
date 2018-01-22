@@ -1,7 +1,7 @@
 package homework.fds.rule;
 
 import homework.fds.log.UserActionLog;
-import homework.fds.result.RuleValidator;
+import homework.fds.validator.RuleValidator;
 import org.assertj.core.util.Lists;
 import org.junit.Before;
 import org.junit.Test;
