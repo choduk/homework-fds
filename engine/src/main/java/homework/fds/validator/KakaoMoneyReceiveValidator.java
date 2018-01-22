@@ -1,6 +1,7 @@
 package homework.fds.validator;
 
 import homework.fds.log.KakaoMoneyReceiveLog;
+import homework.fds.log.UserActionLog;
 
 import java.util.List;
 
@@ -8,7 +9,7 @@ import java.util.List;
  * @author choduk88@sk.com
  * @since 2018. 1. 22..
  */
-public class KakaoMoneyReceiveValidator implements RuleValidator<KakaoMoneyReceiveLog> {
+public class KakaoMoneyReceiveValidator implements RuleValidator {
 
     private final long thresholdsMoney;
     private final int count;
@@ -19,8 +20,11 @@ public class KakaoMoneyReceiveValidator implements RuleValidator<KakaoMoneyRecei
     }
 
     @Override
-    public boolean validate(List<KakaoMoneyReceiveLog> userActionLogStream) {
+    public boolean validate(List<UserActionLog> userActionLogStream) {
         return userActionLogStream.stream()
+                                  .map(UserActionLog::getData)
+                                  .filter(obj -> KakaoMoneyReceiveLog.class.equals(obj.getClass()))
+                                  .map(KakaoMoneyReceiveLog.class::cast)
                                   .map(log -> log.isOverReceivedMoney(thresholdsMoney))
                                   .count() >= 3;
     }

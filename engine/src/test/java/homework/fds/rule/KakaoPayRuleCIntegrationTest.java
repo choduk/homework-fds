@@ -1,6 +1,5 @@
 package homework.fds.rule;
 
-import homework.fds.filter.AccountOpenPeriodCondition;
 import homework.fds.filter.ActionTypeCondition;
 import homework.fds.filter.Condition;
 import homework.fds.filter.PeriodCondition;
@@ -22,7 +21,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author choduk88@sk.com
  * @since 2018. 1. 22..
  */
-public class KakaoPayRuleIntegrationTest {
+public class KakaoPayRuleCIntegrationTest {
 
     private Rule rule;
 
@@ -59,7 +58,7 @@ public class KakaoPayRuleIntegrationTest {
         return periodCondition;
     }
 
-    private RuleValidator<KakaoMoneyReceiveLog> createValidator() {
+    private RuleValidator createValidator() {
         return new KakaoMoneyReceiveValidator(50000L, 3);
     }
 }
