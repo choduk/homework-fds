@@ -6,6 +6,10 @@ package homework.fds.log;
  */
 public class KakaoMoneyChargeLog {
     private String account;
-    private String chargingMoney;
+    private Long chargingMoney;
     private String bankAccount;
+
+    public KakaoMoneyChargeLog(Long chargingMoney) {
+        this.chargingMoney = chargingMoney;
+    }
 }

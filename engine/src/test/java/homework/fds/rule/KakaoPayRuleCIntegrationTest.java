@@ -1,19 +1,16 @@
 package homework.fds.rule;
 
+import homework.fds.TestHelper;
 import homework.fds.filter.ActionTypeCondition;
 import homework.fds.filter.Condition;
 import homework.fds.filter.PeriodCondition;
-import homework.fds.log.KakaoMoneyReceiveLog;
-import homework.fds.log.UserActionLog;
 import homework.fds.type.ActionType;
 import homework.fds.validator.KakaoMoneyReceiveValidator;
 import homework.fds.validator.RuleValidator;
-import org.assertj.core.util.Lists;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -32,23 +29,8 @@ public class KakaoPayRuleCIntegrationTest {
 
     @Test
     public void success() throws Exception {
-        // given
-        List<UserActionLog> maockActionLogList = createMockActionLogList();
-
         // when then
-        assertThat(rule.isMatch(maockActionLogList)).isTrue();
-    }
-
-    private List<UserActionLog> createMockActionLogList() {
-        return Lists.newArrayList(createUserActionLog(), createUserActionLog(), createUserActionLog());
-    }
-
-    private UserActionLog createUserActionLog() {
-        return UserActionLog.of()
-                            .actionType(ActionType.RECEIVE.name())
-                            .createDt(LocalDateTime.now().minusHours(1))
-                            .data(new KakaoMoneyReceiveLog(50000L))
-                            .build();
+        assertThat(rule.isMatch(TestHelper.getRuleCLog())).isTrue();
     }
 
     private Condition createCondition() {

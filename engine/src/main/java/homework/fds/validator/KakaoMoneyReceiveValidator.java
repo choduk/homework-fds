@@ -26,6 +26,6 @@ public class KakaoMoneyReceiveValidator implements RuleValidator {
                                   .filter(obj -> KakaoMoneyReceiveLog.class.equals(obj.getClass()))
                                   .map(KakaoMoneyReceiveLog.class::cast)
                                   .map(log -> log.isOverReceivedMoney(thresholdsMoney))
-                                  .count() >= 3;
+                                  .count() >= count;
     }
 }
