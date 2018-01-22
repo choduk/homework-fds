@@ -1,5 +1,6 @@
 package homework.fds.rule;
 
+import homework.fds.filter.Condition;
 import homework.fds.log.UserActionLog;
 import homework.fds.validator.RuleValidator;
 import org.assertj.core.util.Lists;
@@ -22,44 +23,58 @@ import static org.mockito.Mockito.when;
 public class KakaoPayRuleTest {
 
     private Rule rule;
+    private Condition condition;
     private RuleValidator validator;
 
     @Before
     public void setUp() throws Exception {
         validator = Mockito.mock(RuleValidator.class);
-        rule = new KakaoPayRule("Test Rule", validator);
+        condition = Mockito.mock(Condition.class);
+        rule = new KakaoPayRule("Test Rule", condition, validator);
     }
 
     @Test
-    public void success__return__false__when__userActionLog__is__empty() throws Exception {
+    public void return__false__when__userActionLog__is__empty() throws Exception {
         assertThat(rule.isMatch(Collections.emptyList())).isFalse();
     }
 
     @Test
-    public void success__return__false__when__userActionLog__is__null() throws Exception {
+    public void return__false__when__userActionLog__is__null() throws Exception {
         assertThat(rule.isMatch(null)).isFalse();
     }
 
     @Test
-    public void success__when__validator__return__true() throws Exception {
+    public void return__false__when__condition__apply__return__empty() throws Exception {
         // given when
-        when(validator.validate(any())).thenReturn(true);
+        when(condition.apply(any())).thenReturn(Collections.emptyList());
 
         // then
-        assertThat(rule.isMatch(createMock())).isTrue();
+        assertThat(rule.isMatch(createMock())).isFalse();
     }
 
     @Test
-    public void fail__when__validator__return__false() throws Exception {
+    public void return__false__when__validator__return__false() throws Exception {
         // given when
+        when(condition.apply(any())).thenReturn(createMock());
         when(validator.validate(any())).thenReturn(false);
 
         // then
         assertThat(rule.isMatch(createMock())).isFalse();
     }
 
+    @Test
+    public void success__when__validator__return__true() throws Exception {
+        // given when
+        when(condition.apply(any())).thenReturn(createMock());
+        when(validator.validate(any())).thenReturn(true);
+
+        // then
+        assertThat(rule.isMatch(createMock())).isTrue();
+    }
+
     private List<UserActionLog> createMock() {
-        return Lists.newArrayList(UserActionLog.of().build());
+        return Lists.newArrayList(UserActionLog.of()
+                                               .build());
     }
 
 
