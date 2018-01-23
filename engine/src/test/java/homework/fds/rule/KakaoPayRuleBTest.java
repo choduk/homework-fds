@@ -2,18 +2,11 @@ package homework.fds.rule;
 
 import homework.fds.TestHelper;
 import homework.fds.filter.AccountOpenPeriodCondition;
-import homework.fds.filter.ActionTypeCondition;
 import homework.fds.filter.Condition;
-import homework.fds.filter.PeriodCondition;
-import homework.fds.log.UserActionLog;
-import homework.fds.type.ActionType;
 import homework.fds.validator.KakaoMoneyReceiveValidator;
 import homework.fds.validator.RuleValidator;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.time.LocalDateTime;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -33,7 +26,7 @@ public class KakaoPayRuleBTest {
     @Test
     public void success() throws Exception {
         // when then
-        assertThat(rule.isMatch(TestHelper.getRuleBLog())).isTrue();
+        assertThat(rule.isMatching(TestHelper.getRuleBLog())).isTrue();
     }
 
     private Condition createCondition() {

@@ -1,12 +1,8 @@
 package homework.fds.rule;
 
 import homework.fds.TestHelper;
-import homework.fds.extractor.KakaoMoneyLogExtractor;
-import homework.fds.extractor.UserActionLogDataExtractor;
 import homework.fds.filter.AccountOpenPeriodCondition;
 import homework.fds.filter.Condition;
-import homework.fds.validator.KakaoMoneyChargeValidator;
-import homework.fds.validator.KakaoMoneyLogBalanceCalcValidator;
 import homework.fds.validator.KakaoRuleACompositeValidator;
 import homework.fds.validator.RuleValidator;
 import org.junit.Before;
@@ -30,7 +26,7 @@ public class KakaoPayRuleATest {
     @Test
     public void success() throws Exception {
         // when then
-        assertThat(rule.isMatch(TestHelper.getRuleALog())).isTrue();
+        assertThat(rule.isMatching(TestHelper.getRuleALog())).isTrue();
     }
 
     private Condition createCondition() {

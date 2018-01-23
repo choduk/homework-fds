@@ -24,7 +24,7 @@ public class FraudDetectionEngine {
         this.rules = rules;
     }
 
-    public List<Rule> findMatchedRules(List<UserActionLog> userActionLogs) {
+    public List<Rule> ruleMatching(List<UserActionLog> userActionLogs) {
 
         List<Future<RuleResult>> futureList = rules.stream()
                                                    .map(rule -> executorService.submit(new RuleCallable(rule, userActionLogs)))
@@ -58,7 +58,7 @@ public class FraudDetectionEngine {
 
         @Override
         public RuleResult call() throws Exception {
-            return new RuleResult(rule, rule.isMatch(userActionLogs));
+            return new RuleResult(rule, rule.isMatching(userActionLogs));
         }
     }
 

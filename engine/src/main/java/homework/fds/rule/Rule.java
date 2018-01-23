@@ -8,6 +8,6 @@ import java.util.List;
  * @since 2018. 1. 20..
  */
 public interface Rule {
-    boolean isMatch(List<UserActionLog> actionLogs);
+    boolean isMatching(List<UserActionLog> actionLogs);
     String getName();
 }

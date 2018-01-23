@@ -35,12 +35,12 @@ public class KakaoPayRuleUnitTest {
 
     @Test
     public void return__false__when__userActionLog__is__empty() throws Exception {
-        assertThat(rule.isMatch(Collections.emptyList())).isFalse();
+        assertThat(rule.isMatching(Collections.emptyList())).isFalse();
     }
 
     @Test
     public void return__false__when__userActionLog__is__null() throws Exception {
-        assertThat(rule.isMatch(null)).isFalse();
+        assertThat(rule.isMatching(null)).isFalse();
     }
 
     @Test
@@ -49,7 +49,7 @@ public class KakaoPayRuleUnitTest {
         when(condition.apply(any())).thenReturn(Collections.emptyList());
 
         // then
-        assertThat(rule.isMatch(createMock())).isFalse();
+        assertThat(rule.isMatching(createMock())).isFalse();
     }
 
     @Test
@@ -59,7 +59,7 @@ public class KakaoPayRuleUnitTest {
         when(validator.validate(any())).thenReturn(false);
 
         // then
-        assertThat(rule.isMatch(createMock())).isFalse();
+        assertThat(rule.isMatching(createMock())).isFalse();
     }
 
     @Test
@@ -69,7 +69,7 @@ public class KakaoPayRuleUnitTest {
         when(validator.validate(any())).thenReturn(true);
 
         // then
-        assertThat(rule.isMatch(createMock())).isTrue();
+        assertThat(rule.isMatching(createMock())).isTrue();
     }
 
     private List<UserActionLog> createMock() {

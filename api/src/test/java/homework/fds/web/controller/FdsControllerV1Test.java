@@ -1,7 +1,7 @@
 package homework.fds.web.controller;
 
 import homework.fds.domain.fds.service.FdsService;
-import homework.fds.domain.fds.dto.FraudRule;
+import homework.fds.domain.fds.dto.DetectedRule;
 import homework.fds.web.controller.dto.FdsResponseV1;
 import org.assertj.core.util.Lists;
 import org.junit.Before;
@@ -35,7 +35,7 @@ public class FdsControllerV1Test {
     @Test
     public void not__fraud__when__service__return__empty__rules() throws Exception {
         // given when
-        when(mockService.getFraudRules(anyLong())).thenReturn(Collections.emptyList());
+        when(mockService.validate(anyLong())).thenReturn(Collections.emptyList());
         FdsResponseV1 response = fdsControllerV1.getMatchingFraudRules(anyLong());
 
         // then
@@ -46,7 +46,7 @@ public class FdsControllerV1Test {
     @Test
     public void fraud__when__service__return__fraud__rules() throws Exception {
         // given when
-        when(mockService.getFraudRules(anyLong())).thenReturn(Lists.newArrayList(
+        when(mockService.validate(anyLong())).thenReturn(Lists.newArrayList(
                 createMockFraudRule("rule1"),
                 createMockFraudRule("rule2")
         ));
@@ -57,9 +57,9 @@ public class FdsControllerV1Test {
         assertThat(response.getRule()).isEqualTo("rule1,rule2");
     }
 
-    private FraudRule createMockFraudRule(String ruleName) {
-        return FraudRule.of()
-                        .name(ruleName)
-                        .build();
+    private DetectedRule createMockFraudRule(String ruleName) {
+        return DetectedRule.of()
+                           .name(ruleName)
+                           .build();
     }
 }

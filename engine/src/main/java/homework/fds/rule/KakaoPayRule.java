@@ -23,7 +23,7 @@ public class KakaoPayRule implements Rule {
     }
 
     @Override
-    public boolean isMatch(List<UserActionLog> userActionLogs) {
+    public boolean isMatching(List<UserActionLog> userActionLogs) {
 
         if (isEmpty(userActionLogs))
             return false;

@@ -21,8 +21,8 @@ public class KakaoMoneyChargeValidator implements RuleValidator {
     }
 
     @Override
-    public boolean validate(List<UserActionLog> userActionLogStream) {
-        return userActionLogStream.stream()
+    public boolean validate(List<UserActionLog> userActionLogs) {
+        return userActionLogs.stream()
                                   .map(UserActionLog::getData)
                                   .filter(Objects::nonNull)
                                   .filter(obj -> KakaoMoneyChargeLog.class.equals(obj.getClass()))

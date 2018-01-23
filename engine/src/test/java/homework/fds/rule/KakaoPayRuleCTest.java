@@ -30,7 +30,7 @@ public class KakaoPayRuleCTest {
     @Test
     public void success() throws Exception {
         // when then
-        assertThat(rule.isMatch(TestHelper.getRuleCLog())).isTrue();
+        assertThat(rule.isMatching(TestHelper.getRuleCLog())).isTrue();
     }
 
     private Condition createCondition() {

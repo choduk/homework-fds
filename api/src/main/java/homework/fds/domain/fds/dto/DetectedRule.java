@@ -9,7 +9,7 @@ import lombok.Getter;
  */
 @Getter
 @Builder(builderMethodName = "of")
-public class FraudRule {
+public class DetectedRule {
 
     private String name;
 }

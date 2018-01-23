@@ -1,7 +1,7 @@
 package homework.fds.domain.fds.service;
 
 import homework.fds.FraudDetectionEngine;
-import homework.fds.domain.fds.dto.FraudRule;
+import homework.fds.domain.fds.dto.DetectedRule;
 import homework.fds.domain.fds.repository.UserActionLogRepository;
 import homework.fds.log.UserActionLog;
 import lombok.RequiredArgsConstructor;
@@ -23,18 +23,18 @@ public class FdsServiceImpl implements FdsService {
     private final UserActionLogRepository mockUserActionLogRepositoryImpl;
 
     @Override
-    public List<FraudRule> getFraudRules(Long userId) {
+    public List<DetectedRule> validate(Long userId) {
 
         List<UserActionLog> userActionLogs = mockUserActionLogRepositoryImpl.findByUserId(userId);
-        return fraudDetectionEngine.findMatchedRules(userActionLogs)
+        return fraudDetectionEngine.ruleMatching(userActionLogs)
                                    .stream()
-                                   .map(rule -> createFraudRule(rule.getName()))
+                                   .map(rule -> createDetectedRule(rule.getName()))
                                    .collect(Collectors.toList());
     }
 
-    private FraudRule createFraudRule(String ruleName) {
-        return FraudRule.of()
-                        .name(ruleName)
-                        .build();
+    private DetectedRule createDetectedRule(String ruleName) {
+        return DetectedRule.of()
+                           .name(ruleName)
+                           .build();
     }
 }

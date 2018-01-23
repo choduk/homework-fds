@@ -1,7 +1,7 @@
 package homework.fds.web.controller;
 
 import homework.fds.domain.fds.service.FdsService;
-import homework.fds.domain.fds.dto.FraudRule;
+import homework.fds.domain.fds.dto.DetectedRule;
 import homework.fds.web.controller.dto.FdsResponseV1;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,20 +28,20 @@ public class FdsControllerV1 {
     @GetMapping("fraud/{user_Id}")
     public FdsResponseV1 getMatchingFraudRules(@PathVariable(name = "user_Id") Long userId) {
 
-        List<FraudRule> detectedRuleList = fdsService.getFraudRules(userId);
+        List<DetectedRule> detectedRuleList = fdsService.validate(userId);
 
         return FdsResponseV1.of()
                             .userId(userId)
                             .fraud(!isEmpty(detectedRuleList))
-                            .rule(joinedRule(detectedRuleList))
+                            .rule(joinRuleName(detectedRuleList))
                             .build();
     }
 
-    private String joinedRule(List<FraudRule> fraudRuleList) {
-        if (isEmpty(fraudRuleList))
+    private String joinRuleName(List<DetectedRule> detectedRuleList) {
+        if (isEmpty(detectedRuleList))
             return "";
-        return fraudRuleList.stream()
-                            .map(FraudRule::getName)
-                            .collect(Collectors.joining(","));
+        return detectedRuleList.stream()
+                               .map(DetectedRule::getName)
+                               .collect(Collectors.joining(","));
     }
 }

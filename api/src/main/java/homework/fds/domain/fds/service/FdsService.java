@@ -1,6 +1,6 @@
 package homework.fds.domain.fds.service;
 
-import homework.fds.domain.fds.dto.FraudRule;
+import homework.fds.domain.fds.dto.DetectedRule;
 
 import java.util.List;
 
@@ -9,5 +9,5 @@ import java.util.List;
  * @since 2018. 1. 20..
  */
 public interface FdsService {
-    List<FraudRule> getFraudRules(Long userId);
+    List<DetectedRule> validate(Long userId);
 }

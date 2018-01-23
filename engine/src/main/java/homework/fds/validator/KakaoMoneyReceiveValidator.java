@@ -20,8 +20,8 @@ public class KakaoMoneyReceiveValidator implements RuleValidator {
     }
 
     @Override
-    public boolean validate(List<UserActionLog> userActionLogStream) {
-        return userActionLogStream.stream()
+    public boolean validate(List<UserActionLog> userActionLogs) {
+        return userActionLogs.stream()
                                   .map(UserActionLog::getData)
                                   .filter(obj -> KakaoMoneyReceiveLog.class.equals(obj.getClass()))
                                   .map(KakaoMoneyReceiveLog.class::cast)
