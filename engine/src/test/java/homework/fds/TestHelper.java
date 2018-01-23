@@ -16,10 +16,10 @@ import static homework.fds.type.ActionType.*;
  */
 public class TestHelper {
 
-    private static final long QUARTER_HOUR = 15;
-    private static final long HOUR = 60;
-    private static final long DAY = HOUR * 24;
-    private static final long MONTH = DAY * 30;
+    public static final long QUARTER_HOUR = 15;
+    public static final long HOUR = 60;
+    public static final long DAY = HOUR * 24;
+    public static final long MONTH = DAY * 30;
 
     private static List<UserActionLog> dummyLog = new ArrayList<>();
 

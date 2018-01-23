@@ -25,7 +25,7 @@ public class AccountOpenPeriodCondition extends Condition {
 
         LocalDateTime accountOpenDt = findAccountOpenLocalDateTime(userActionLogs);
 
-        PeriodCondition periodCondition = new PeriodCondition(accountOpenDt, accountOpenDt.plusHours(afterHour));
+        Condition periodCondition = new PeriodCondition(accountOpenDt, accountOpenDt.plusHours(afterHour));
         return periodCondition.filter(userActionLogs);
     }
 
