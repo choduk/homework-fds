@@ -19,12 +19,13 @@ import java.util.stream.Collectors;
 public class FdsServiceImpl implements FdsService {
 
     private final FraudDetectionEngine fraudDetectionEngine;
-    private final UserActionLogRepository userActionLogRepository;
+
+    private final UserActionLogRepository mockUserActionLogRepositoryImpl;
 
     @Override
     public List<FraudRule> getFraudRules(Long userId) {
 
-        List<UserActionLog> userActionLogs = userActionLogRepository.findByUserId(userId);
+        List<UserActionLog> userActionLogs = mockUserActionLogRepositoryImpl.findByUserId(userId);
         return fraudDetectionEngine.findMatchedRules(userActionLogs)
                                    .stream()
                                    .map(rule -> createFraudRule(rule.getName()))
