@@ -23,6 +23,15 @@ public class TestHelper {
 
     private static List<UserActionLog> dummyLog = new ArrayList<>();
 
+    public static List<UserActionLog> getAllLog() {
+        return dummyLog;
+    }
+
+    public static int getActionLogCount(ActionType type) {
+        return (int)dummyLog.stream()
+                       .filter(log -> log.isEqualToActionType(type.name()))
+                       .count();
+    }
 
     public static List<UserActionLog> getRuleALog() {
         return getDummyLog(1L);
@@ -38,7 +47,8 @@ public class TestHelper {
 
     public static List<UserActionLog> getDummyLog(long userId) {
         return dummyLog.stream()
-                       .filter(log -> log.getUserId().equals(userId))
+                       .filter(log -> log.getUserId()
+                                         .equals(userId))
                        .collect(Collectors.toList());
     }
 
@@ -95,7 +105,7 @@ public class TestHelper {
 
     private static Object dataFactory(ActionType actionType) {
 
-        switch(actionType) {
+        switch (actionType) {
             case ACCOUNT_OPEN:
                 return new KakaoMoneyServiceAccountOpenLog();
             case SEND:
