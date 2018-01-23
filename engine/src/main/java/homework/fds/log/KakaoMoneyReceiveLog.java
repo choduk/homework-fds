@@ -19,6 +19,6 @@ public class KakaoMoneyReceiveLog {
     }
 
     public boolean isOverReceivedMoney(long money) {
-        return this.receivedMoney > money;
+        return this.receivedMoney >= money;
     }
 }
