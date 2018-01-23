@@ -1,7 +1,12 @@
 package homework.fds.validator;
 
+import homework.fds.TestHelper;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.Collections;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 
 /**
@@ -10,7 +15,6 @@ import org.junit.Test;
  */
 public class KakaoMoneyReceiveValidatorTest {
     private RuleValidator ruleValidator;
-    private Object obj;
 
     @Before
     public void setUp() throws Exception {
@@ -18,11 +22,22 @@ public class KakaoMoneyReceiveValidatorTest {
     }
 
     @Test
-    public void test() throws Exception {
-        // given
-
-        // when
-
-        // then
+    public void success() throws Exception {
+        // when then
+        assertThat(ruleValidator.validate(TestHelper.getRuleALog())).isFalse();
+        assertThat(ruleValidator.validate(TestHelper.getRuleBLog())).isTrue();
+        assertThat(ruleValidator.validate(TestHelper.getRuleCLog())).isTrue();
     }
+
+    @Test
+    public void return__false__when__log__is__empty() throws Exception {
+        assertThat(ruleValidator.validate(Collections.emptyList())).isFalse();
+    }
+
+    @Test
+    public void return__false__when__no__received__log() throws Exception {
+        // userID 10 -> only account open log
+        assertThat(ruleValidator.validate(TestHelper.getDummyLog(10L))).isFalse();
+    }
+
 }

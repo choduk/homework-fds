@@ -25,18 +25,18 @@ public class TestHelper {
 
 
     public static List<UserActionLog> getRuleALog() {
-        return filterDummy(1L);
+        return getDummyLog(1L);
     }
 
     public static List<UserActionLog> getRuleBLog() {
-        return filterDummy(4L);
+        return getDummyLog(4L);
     }
 
     public static List<UserActionLog> getRuleCLog() {
-        return filterDummy(5L);
+        return getDummyLog(5L);
     }
 
-    private static List<UserActionLog> filterDummy(long userId) {
+    public static List<UserActionLog> getDummyLog(long userId) {
         return dummyLog.stream()
                        .filter(log -> log.getUserId().equals(userId))
                        .collect(Collectors.toList());
@@ -52,6 +52,7 @@ public class TestHelper {
         dummyLog.add(userActionLog(3L, ACCOUNT_OPEN, now.minusMinutes(MONTH), dataFactory(ACCOUNT_OPEN)));
         dummyLog.add(userActionLog(4L, ACCOUNT_OPEN, now.minusMinutes(MONTH), dataFactory(ACCOUNT_OPEN)));
         dummyLog.add(userActionLog(5L, ACCOUNT_OPEN, now.minusMinutes(MONTH), dataFactory(ACCOUNT_OPEN)));
+        dummyLog.add(userActionLog(10L, ACCOUNT_OPEN, now.minusMinutes(MONTH), dataFactory(ACCOUNT_OPEN)));
 
         // charge log
         dummyLog.add(userActionLog(1L, CHARGE, now.minusMinutes(MONTH - QUARTER_HOUR), dataFactory(CHARGE)));
