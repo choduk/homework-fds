@@ -9,6 +9,12 @@ public class KakaoMoneyChargeLog {
     private Long chargingMoney;
     private String bankAccount;
 
+    public KakaoMoneyChargeLog(String account, Long chargingMoney, String bankAccount) {
+        this.account = account;
+        this.chargingMoney = chargingMoney;
+        this.bankAccount = bankAccount;
+    }
+
     public KakaoMoneyChargeLog(Long chargingMoney) {
         this.chargingMoney = chargingMoney;
     }

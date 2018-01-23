@@ -6,4 +6,11 @@ package homework.fds.log;
  */
 public class KakaoMoneyServiceAccountOpenLog {
     private String account;
+
+    public KakaoMoneyServiceAccountOpenLog() {
+    }
+
+    public KakaoMoneyServiceAccountOpenLog(String account) {
+        this.account = account;
+    }
 }

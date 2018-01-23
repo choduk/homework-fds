@@ -14,6 +14,14 @@ public class KakaoMoneyReceiveLog {
 
     private Long receivedMoney;
 
+    public KakaoMoneyReceiveLog(String receiverAccount, Long beforeKakaoMoneyBalance, String senderAccount, String senderUserId, Long receivedMoney) {
+        this.receiverAccount = receiverAccount;
+        this.beforeKakaoMoneyBalance = beforeKakaoMoneyBalance;
+        this.senderAccount = senderAccount;
+        this.senderUserId = senderUserId;
+        this.receivedMoney = receivedMoney;
+    }
+
     public KakaoMoneyReceiveLog(Long receivedMoney) {
         this.receivedMoney = receivedMoney;
     }
