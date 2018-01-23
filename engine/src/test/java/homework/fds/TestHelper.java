@@ -16,7 +16,7 @@ import static homework.fds.type.ActionType.*;
  */
 public class TestHelper {
 
-    public static final long QUARTER_HOUR = 15;
+    public static final long QUARTER_MINUTE = 15;
     public static final long HOUR = 60;
     public static final long DAY = HOUR * 24;
     public static final long MONTH = DAY * 30;
@@ -65,17 +65,21 @@ public class TestHelper {
         dummyLog.add(userActionLog(10L, ACCOUNT_OPEN, now.minusMinutes(MONTH), dataFactory(ACCOUNT_OPEN)));
 
         // charge log
-        dummyLog.add(userActionLog(1L, CHARGE, now.minusMinutes(MONTH - QUARTER_HOUR), dataFactory(CHARGE)));
-        dummyLog.add(userActionLog(2L, CHARGE, now.minusMinutes(MONTH - QUARTER_HOUR), dataFactory(CHARGE)));
-        dummyLog.add(userActionLog(3L, CHARGE, now.minusMinutes(MONTH - QUARTER_HOUR), dataFactory(CHARGE)));
-        dummyLog.add(userActionLog(4L, CHARGE, now.minusMinutes(MONTH - QUARTER_HOUR), dataFactory(CHARGE)));
-        dummyLog.add(userActionLog(5L, CHARGE, now.minusMinutes(MONTH - QUARTER_HOUR), dataFactory(CHARGE)));
+        dummyLog.add(userActionLog(1L, CHARGE, now.minusMinutes(MONTH - QUARTER_MINUTE), dataFactory(CHARGE)));
+        dummyLog.add(userActionLog(2L, CHARGE, now.minusMinutes(MONTH - QUARTER_MINUTE), dataFactory(CHARGE)));
+        dummyLog.add(userActionLog(3L, CHARGE, now.minusMinutes(MONTH - QUARTER_MINUTE), dataFactory(CHARGE)));
+        dummyLog.add(userActionLog(4L, CHARGE, now.minusMinutes(MONTH - QUARTER_MINUTE), dataFactory(CHARGE)));
+        dummyLog.add(userActionLog(5L, CHARGE, now.minusMinutes(MONTH - QUARTER_MINUTE), dataFactory(CHARGE)));
 
         // rule A target
-        dummyLog.add(userActionLog(1L, SEND, now.minusMinutes(MONTH - QUARTER_HOUR * 2), dataFactory(SEND)));
-        dummyLog.add(userActionLog(1L, RECEIVE, now.minusMinutes(MONTH - QUARTER_HOUR * 2), dataFactory(RECEIVE)));
-        dummyLog.add(userActionLog(1L, SEND, now.minusMinutes(MONTH - QUARTER_HOUR * 3), dataFactory(SEND)));
-        dummyLog.add(userActionLog(1L, SEND, now.minusMinutes(MONTH - QUARTER_HOUR * 3), dataFactory(SEND)));
+        dummyLog.add(userActionLog(1L, RECEIVE, now.minusMinutes(MONTH - 5), new KakaoMoneyReceiveLog(10000L))); // 0 -> 10,000
+        dummyLog.add(userActionLog(1L, SEND, now.minusMinutes(MONTH - 6), new KakaoMoneySendLog(5000L)));         // 10,000 -> 5,000
+        dummyLog.add(userActionLog(1L, SEND, now.minusMinutes(MONTH - 7), new KakaoMoneySendLog(5000L)));         // 5,000 -> 0
+        dummyLog.add(userActionLog(1L, SEND, now.minusMinutes(MONTH - 7), null)); // bug... 무시해야함
+        // 위 로그에서 200000L 충전함                                                                                                     // 200,000
+        dummyLog.add(userActionLog(1L, RECEIVE, now.minusMinutes(MONTH - QUARTER_MINUTE * 2), new KakaoMoneyReceiveLog(500L)));// 200,000 -> 200,500
+        dummyLog.add(userActionLog(1L, SEND, now.minusMinutes(MONTH - QUARTER_MINUTE * 3), new KakaoMoneySendLog(200000L))); // 200,500 -> 500
+        dummyLog.add(userActionLog(1L, RECEIVE, now.minusMinutes(MONTH - QUARTER_MINUTE * 2), new KakaoMoneyReceiveLog(9000L)));// 500 -> 9,500
 
         // rule B target
         dummyLog.add(userActionLog(4L, RECEIVE, now.minusMinutes(MONTH - DAY * 1), dataFactory(RECEIVE)));
@@ -86,11 +90,11 @@ public class TestHelper {
         dummyLog.add(userActionLog(4L, RECEIVE, now.minusMinutes(MONTH - DAY * 6), dataFactory(RECEIVE)));
 
         // rule C target
-        dummyLog.add(userActionLog(5L, RECEIVE, now.minusMinutes(2 * HOUR - QUARTER_HOUR * 1), dataFactory(RECEIVE)));
-        dummyLog.add(userActionLog(5L, RECEIVE, now.minusMinutes(2 * HOUR - QUARTER_HOUR * 2), dataFactory(RECEIVE)));
-        dummyLog.add(userActionLog(5L, RECEIVE, now.minusMinutes(2 * HOUR - QUARTER_HOUR * 3), dataFactory(RECEIVE)));
-        dummyLog.add(userActionLog(5L, RECEIVE, now.minusMinutes(2 * HOUR - QUARTER_HOUR * 4), dataFactory(RECEIVE)));
-        dummyLog.add(userActionLog(5L, RECEIVE, now.minusMinutes(2 * HOUR - QUARTER_HOUR * 5), dataFactory(RECEIVE)));
+        dummyLog.add(userActionLog(5L, RECEIVE, now.minusMinutes(2 * HOUR - QUARTER_MINUTE * 1), dataFactory(RECEIVE)));
+        dummyLog.add(userActionLog(5L, RECEIVE, now.minusMinutes(2 * HOUR - QUARTER_MINUTE * 2), dataFactory(RECEIVE)));
+        dummyLog.add(userActionLog(5L, RECEIVE, now.minusMinutes(2 * HOUR - QUARTER_MINUTE * 3), dataFactory(RECEIVE)));
+        dummyLog.add(userActionLog(5L, RECEIVE, now.minusMinutes(2 * HOUR - QUARTER_MINUTE * 4), dataFactory(RECEIVE)));
+        dummyLog.add(userActionLog(5L, RECEIVE, now.minusMinutes(2 * HOUR - QUARTER_MINUTE * 5), dataFactory(RECEIVE)));
     }
 
 

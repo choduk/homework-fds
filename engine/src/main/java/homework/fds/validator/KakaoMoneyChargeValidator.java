@@ -4,6 +4,7 @@ import homework.fds.log.KakaoMoneyChargeLog;
 import homework.fds.log.UserActionLog;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author choduk88@sk.com
@@ -23,6 +24,7 @@ public class KakaoMoneyChargeValidator implements RuleValidator {
     public boolean validate(List<UserActionLog> userActionLogStream) {
         return userActionLogStream.stream()
                                   .map(UserActionLog::getData)
+                                  .filter(Objects::nonNull)
                                   .filter(obj -> KakaoMoneyChargeLog.class.equals(obj.getClass()))
                                   .map(KakaoMoneyChargeLog.class::cast)
                                   .map(log -> log.isEqualsToChargeMoney(thresholdsMoney))
