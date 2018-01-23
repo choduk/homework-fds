@@ -17,4 +17,8 @@ public class KakaoMoneySendLog {
     public KakaoMoneySendLog(Long sendedMoney) {
         this.sendedMoney = sendedMoney;
     }
+
+    public Long getSendedMoney() {
+        return sendedMoney;
+    }
 }

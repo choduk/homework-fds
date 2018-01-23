@@ -16,4 +16,8 @@ public class KakaoMoneyChargeLog {
     public boolean isEqualsToChargeMoney(long thresholdsMoney) {
         return thresholdsMoney == chargingMoney;
     }
+
+    public Long getChargingMoney() {
+        return chargingMoney;
+    }
 }
