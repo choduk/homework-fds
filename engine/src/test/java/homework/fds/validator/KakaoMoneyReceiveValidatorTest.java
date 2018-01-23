@@ -24,7 +24,7 @@ public class KakaoMoneyReceiveValidatorTest {
     @Test
     public void success() throws Exception {
         // when then
-        assertThat(ruleValidator.validate(TestHelper.getRuleALog())).isFalse();
+        assertThat(ruleValidator.validate(TestHelper.getRuleALog())).isTrue();
         assertThat(ruleValidator.validate(TestHelper.getRuleBLog())).isTrue();
         assertThat(ruleValidator.validate(TestHelper.getRuleCLog())).isTrue();
     }

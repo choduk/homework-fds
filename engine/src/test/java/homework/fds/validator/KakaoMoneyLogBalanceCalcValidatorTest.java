@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -46,7 +47,10 @@ public class KakaoMoneyLogBalanceCalcValidatorTest {
     private List<UserActionLog> createMock(int numberOfMock) {
         return IntStream.range(0, numberOfMock)
                         .boxed()
-                        .map(i -> UserActionLog.of().data(new KakaoMoneyChargeLog(1L)).build())
+                        .map(i -> UserActionLog.of()
+                                               .createDt(LocalDateTime.now())
+                                               .data(new KakaoMoneyChargeLog(1L))
+                                               .build())
                         .collect(Collectors.toList());
     }
 }

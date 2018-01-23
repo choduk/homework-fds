@@ -4,6 +4,7 @@ import homework.fds.extractor.UserActionLogDataExtractor;
 import homework.fds.log.KakaoMoneySendLog;
 import homework.fds.log.UserActionLog;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -17,21 +18,47 @@ public class KakaoMoneyLogBalanceCalcValidator implements RuleValidator {
 
     private final UserActionLogDataExtractor<Long> logExtractor;
     private final Predicate<Long> validatePredicate;
+    private Predicate<Long> validateStartAfterTargetPredicate;
 
     public KakaoMoneyLogBalanceCalcValidator(UserActionLogDataExtractor<Long> logExtractor, Predicate<Long> validatePredicate) {
         this.logExtractor = logExtractor;
         this.validatePredicate = validatePredicate;
     }
 
+    public KakaoMoneyLogBalanceCalcValidator(UserActionLogDataExtractor<Long> logExtractor, Predicate<Long> validatePredicate, Predicate<Long> validateStartAfterTargetPredicate) {
+        this.logExtractor = logExtractor;
+        this.validatePredicate = validatePredicate;
+        this.validateStartAfterTargetPredicate = validateStartAfterTargetPredicate;
+    }
+
     @Override
-    public boolean validate(List<UserActionLog> userActionLog) {
+    public boolean validate(List<UserActionLog> userActionLogs) {
 
-        long sum = userActionLog.stream()
-                                .map(this::getMoney)
-                                .mapToLong(Long::longValue)
-                                .sum();
+        userActionLogs.sort(Comparator.comparing(UserActionLog::getCreateDt));
 
-        return validatePredicate.test(sum);
+        boolean isStart = false;
+        long sum = 0;
+        for (UserActionLog log : userActionLogs) {
+            Long money = getMoney(log);
+            if(isValidateStart(money))
+                isStart = true;
+
+            sum += money;
+            if (isStart && validatePredicate.test(sum))
+                return true;
+        }
+
+        return false;
+
+//        long sum = userActionLogs.stream()
+//                                .map(this::getMoney)
+//                                .mapToLong(Long::longValue)
+//                                .sum();
+//        return validatePredicate.test(sum);
+    }
+
+    private boolean isValidateStart(Long money) {
+        return isNull(validateStartAfterTargetPredicate) || validateStartAfterTargetPredicate.test(money);
     }
 
     private Long getMoney(UserActionLog userActionLog) {

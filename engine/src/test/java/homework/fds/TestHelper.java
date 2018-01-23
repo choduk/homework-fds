@@ -75,11 +75,11 @@ public class TestHelper {
         dummyLog.add(userActionLog(1L, RECEIVE, now.minusMinutes(MONTH - 5), new KakaoMoneyReceiveLog(10000L))); // 0 -> 10,000
         dummyLog.add(userActionLog(1L, SEND, now.minusMinutes(MONTH - 6), new KakaoMoneySendLog(5000L)));         // 10,000 -> 5,000
         dummyLog.add(userActionLog(1L, SEND, now.minusMinutes(MONTH - 7), new KakaoMoneySendLog(5000L)));         // 5,000 -> 0
-        dummyLog.add(userActionLog(1L, SEND, now.minusMinutes(MONTH - 7), null)); // bug... 무시해야함
+//        dummyLog.add(userActionLog(1L, SEND, now.minusMinutes(MONTH - 7), null)); // bug... 무시해야함
         // 위 로그에서 200000L 충전함                                                                                                     // 200,000
         dummyLog.add(userActionLog(1L, RECEIVE, now.minusMinutes(MONTH - QUARTER_MINUTE * 2), new KakaoMoneyReceiveLog(500L)));// 200,000 -> 200,500
-        dummyLog.add(userActionLog(1L, SEND, now.minusMinutes(MONTH - QUARTER_MINUTE * 3), new KakaoMoneySendLog(200000L))); // 200,500 -> 500
-        dummyLog.add(userActionLog(1L, RECEIVE, now.minusMinutes(MONTH - QUARTER_MINUTE * 2), new KakaoMoneyReceiveLog(9000L)));// 500 -> 9,500
+        dummyLog.add(userActionLog(1L, SEND, now.minusMinutes(MONTH - QUARTER_MINUTE * 2), new KakaoMoneySendLog(200000L))); // 200,500 -> 500
+        dummyLog.add(userActionLog(1L, RECEIVE, now.minusMinutes(MONTH - QUARTER_MINUTE * 3), new KakaoMoneyReceiveLog(9000L)));// 500 -> 9,500
 
         // rule B target
         dummyLog.add(userActionLog(4L, RECEIVE, now.minusMinutes(MONTH - DAY * 1), dataFactory(RECEIVE)));

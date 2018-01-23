@@ -16,15 +16,18 @@ public class KakaoRuleACompositeValidator implements RuleValidator {
 
     public KakaoRuleACompositeValidator() {
         chargeValidator = new KakaoMoneyChargeValidator(200000L, 1);
-        balanceCalcValidator = new KakaoMoneyLogBalanceCalcValidator(new KakaoMoneyLogExtractor(), result -> result <= 1000L);
+        balanceCalcValidator = new KakaoMoneyLogBalanceCalcValidator(new KakaoMoneyLogExtractor(),
+                result -> result <= 1000L,
+                money -> money == 200000L
+        );
     }
 
     @Override
-    public boolean validate(List<UserActionLog> userActionLog) {
+    public boolean validate(List<UserActionLog> userActionLogs) {
 
-        if (!chargeValidator.validate(userActionLog))
+        if (!chargeValidator.validate(userActionLogs))
             return false;
 
-        return balanceCalcValidator.validate(userActionLog);
+        return balanceCalcValidator.validate(userActionLogs);
     }
 }
