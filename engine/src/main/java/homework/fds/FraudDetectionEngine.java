@@ -1,7 +1,7 @@
 package homework.fds;
 
-import homework.fds.core.Rule;
 import homework.fds.log.ActionLog;
+import homework.fds.core.Rule;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
