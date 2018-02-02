@@ -10,4 +10,9 @@ public class ServiceAccountOpenLog {
     private LocalDateTime createDt;
     private Long userId;
     private String account;
+
+    public ServiceAccountOpenLog(Long userId, String account) {
+        this.userId = userId;
+        this.account = account;
+    }
 }

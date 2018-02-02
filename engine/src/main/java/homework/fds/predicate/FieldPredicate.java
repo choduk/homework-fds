@@ -4,6 +4,7 @@ import homework.fds.log.ActionLog;
 import homework.fds.operator.Operator;
 
 import java.lang.reflect.Field;
+import java.util.Objects;
 
 /**
  * @author choduk88@sk.com
@@ -11,14 +12,14 @@ import java.lang.reflect.Field;
  */
 public class FieldPredicate<T> implements ActionLogPredicate {
 
-    private final String fieldName;
-    private final T value;
+    private final String targetField;
     private final Operator<T> operator;
+    private final T threshold;
 
-    public FieldPredicate(String fieldName, T value, Operator<T> operator) {
-        this.fieldName = fieldName;
-        this.value = value;
-        this.operator = operator;
+    public FieldPredicate(String targetField, Operator<T> operator, T threshold) {
+        this.targetField = Objects.requireNonNull(targetField);
+        this.operator = Objects.requireNonNull(operator);
+        this.threshold = Objects.requireNonNull(threshold);
     }
 
     @Override
@@ -29,9 +30,9 @@ public class FieldPredicate<T> implements ActionLogPredicate {
             Field targetField = getField(data);
 
             if (!isEqualsToClass(targetField))
-                return false;
+                throw new RuntimeException();
 
-            return operator.operate(value, (T) targetField.get(data));
+            return operator.operate((T) targetField.get(data), threshold);
 
         } catch (NoSuchFieldException | IllegalAccessException e) {
             throw new RuntimeException();
@@ -40,13 +41,13 @@ public class FieldPredicate<T> implements ActionLogPredicate {
 
     private boolean isEqualsToClass(Field targetField) {
         return targetField.getType()
-                          .equals(value.getClass());
+                          .equals(threshold.getClass());
     }
 
     private Field getField(Object data) throws NoSuchFieldException {
         Field declaredField = data
                 .getClass()
-                .getDeclaredField(fieldName);
+                .getDeclaredField(targetField);
         declaredField.setAccessible(true);
         return declaredField;
     }

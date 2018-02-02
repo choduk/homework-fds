@@ -5,5 +5,5 @@ package homework.fds.operator;
  * @since 2018. 2. 3..
  */
 public interface Operator<T> {
-    boolean operate(T o1, T o2);
+    boolean operate(T value, T threshold);
 }
