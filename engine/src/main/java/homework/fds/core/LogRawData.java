@@ -3,6 +3,7 @@ package homework.fds.core;
 import homework.fds.log.ActionLog;
 
 import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -21,6 +22,11 @@ public class LogRawData {
     }
 
     public Stream<ActionLog> getActionLogStream() {
-        return actionLogList.stream();
+        return actionLogList.stream()
+                .sorted(Comparator.comparing(ActionLog::getCreateDt));
+    }
+
+    public LocalDateTime getCurrentTime() {
+        return currentTime;
     }
 }

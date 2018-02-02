@@ -1,6 +1,6 @@
 package homework.fds.core;
 
-import homework.fds.filter.RuleFilter;
+import homework.fds.filter.ActionLogFilter;
 import homework.fds.log.ActionLog;
 import homework.fds.validator.RuleValidator;
 
@@ -13,16 +13,16 @@ import java.util.Objects;
  */
 public class Rule {
 
-    private final RuleFilter filter;
+    private final ActionLogFilter actionLogFilter;
     private final RuleValidator validator;
 
-    public Rule(RuleFilter filter, RuleValidator validator) {
-        this.filter = Objects.requireNonNull(filter);
+    public Rule(ActionLogFilter actionLogFilter, RuleValidator validator) {
+        this.actionLogFilter = Objects.requireNonNull(actionLogFilter);
         this.validator = Objects.requireNonNull(validator);
     }
 
     public boolean isMatch(LogRawData logRawData) {
-        List<ActionLog> filteredActionLogList = filter.doFilter(logRawData);
+        List<ActionLog> filteredActionLogList = actionLogFilter.doFilter(logRawData);
         return validator.valid(filteredActionLogList);
     }
 }
