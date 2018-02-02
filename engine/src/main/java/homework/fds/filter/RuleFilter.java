@@ -1,8 +1,8 @@
-package homework.fds.core;
+package homework.fds.filter;
 
+import homework.fds.core.LogRawData;
 import homework.fds.log.ActionLog;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -10,5 +10,5 @@ import java.util.List;
  * @since 2018. 2. 2..
  */
 public interface RuleFilter {
-    List<ActionLog> doFilter(List<ActionLog> actionLogList, LocalDateTime currentDt);
+    List<ActionLog> doFilter(LogRawData logRawData);
 }

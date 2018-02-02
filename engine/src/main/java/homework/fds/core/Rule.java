@@ -1,8 +1,8 @@
 package homework.fds.core;
 
+import homework.fds.filter.RuleFilter;
 import homework.fds.log.ActionLog;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -27,13 +27,12 @@ public class Rule {
         return next;
     }
 
-    public boolean isMatch(List<ActionLog> actionLogList, LocalDateTime currentDt) {
+    public boolean isMatch(LogRawData logRawData) {
+        List<ActionLog> filteredActionLogList = filter.doFilter(logRawData);
 
-        List<ActionLog> filteredActionLogList = filter.doFilter(actionLogList, currentDt);
-
-        if(!validator.valid(filteredActionLogList, currentDt))
+        if(!validator.valid(filteredActionLogList))
             return false;
 
-        return !next.isPresent() || next.get().isMatch(actionLogList, currentDt);
+        return !next.isPresent() || next.get().isMatch(logRawData);
     }
 }

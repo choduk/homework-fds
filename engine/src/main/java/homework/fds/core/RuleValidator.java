@@ -2,7 +2,6 @@ package homework.fds.core;
 
 import homework.fds.log.ActionLog;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -10,5 +9,5 @@ import java.util.List;
  * @since 2018. 2. 2..
  */
 public interface RuleValidator {
-    boolean valid(List<ActionLog> filteredActionLogList, LocalDateTime currentDt);
+    boolean valid(List<ActionLog> filteredActionLogList);
 }

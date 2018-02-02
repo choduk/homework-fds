@@ -1,5 +1,6 @@
 package homework.fds;
 
+import homework.fds.core.LogRawData;
 import homework.fds.log.ActionLog;
 import homework.fds.core.Rule;
 
@@ -23,8 +24,10 @@ public class FraudDetectionEngine {
 
     public List<Rule> findMatchedRules(List<ActionLog> actionLogList, LocalDateTime now) {
 
+        LogRawData actionLogRawData = new LogRawData(actionLogList, now);
+
         return rules.stream()
-                    .filter(rule -> rule.isMatch(actionLogList, now))
+                    .filter(rule -> rule.isMatch(actionLogRawData))
                     .collect(toList());
     }
 }
