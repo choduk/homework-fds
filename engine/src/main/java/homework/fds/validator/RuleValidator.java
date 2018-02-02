@@ -1,4 +1,4 @@
-package homework.fds.core;
+package homework.fds.validator;
 
 import homework.fds.log.ActionLog;
 

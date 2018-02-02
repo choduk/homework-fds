@@ -25,7 +25,7 @@ public enum NumberOperator implements Operator<Number> {
     }
 
     @Override
-    public boolean operate(Number targetValue, Number threshold) {
-        return operator.operate(targetValue, threshold);
+    public boolean operate(Number target, Number threshold) {
+        return operator.operate(target, threshold);
     }
 }
