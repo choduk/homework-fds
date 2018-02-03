@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
  * @author choduk88@sk.com
  * @since 2018. 2. 3..
  */
-public class PeriodFilter extends ActionLogFilter {
+public class PeriodFilter extends AbstractLogFilter {
 
     private final LocalDateTime start;
     private final LocalDateTime end;

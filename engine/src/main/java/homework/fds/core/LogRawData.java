@@ -5,7 +5,8 @@ import homework.fds.log.ActionLog;
 import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Stream;
+
+import static java.util.stream.Collectors.toList;
 
 /**
  * @author choduk88@sk.com
@@ -21,9 +22,10 @@ public class LogRawData {
         this.currentTime = currentTime;
     }
 
-    public Stream<ActionLog> getActionLogStream() {
+    public List<ActionLog> getActionLogList() {
         return actionLogList.stream()
-                .sorted(Comparator.comparing(ActionLog::getCreateDt));
+                .sorted(Comparator.comparing(ActionLog::getCreateDt))
+                .collect(toList());
     }
 
     public LocalDateTime getCurrentTime() {
