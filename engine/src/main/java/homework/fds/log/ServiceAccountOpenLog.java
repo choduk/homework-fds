@@ -15,4 +15,7 @@ public class ServiceAccountOpenLog {
         this.userId = userId;
         this.account = account;
     }
+
+    public ServiceAccountOpenLog() {
+    }
 }

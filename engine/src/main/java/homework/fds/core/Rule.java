@@ -13,10 +13,12 @@ import java.util.Objects;
  */
 public class Rule {
 
+    private final String name;
     private final ActionLogFilter actionLogFilter;
     private final RuleValidator validator;
 
-    public Rule(ActionLogFilter actionLogFilter, RuleValidator validator) {
+    public Rule(String name, ActionLogFilter actionLogFilter, RuleValidator validator) {
+        this.name = name;
         this.actionLogFilter = Objects.requireNonNull(actionLogFilter);
         this.validator = Objects.requireNonNull(validator);
     }

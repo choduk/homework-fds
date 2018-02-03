@@ -10,6 +10,10 @@ public class ChargeLog {
     private LocalDateTime createDt;
     private Long userId;
     private String account;
-    private String chargingMoney;
+    private Long chargingMoney;
     private String bankAccount;
+
+    public ChargeLog(Long chargingMoney) {
+        this.chargingMoney = chargingMoney;
+    }
 }

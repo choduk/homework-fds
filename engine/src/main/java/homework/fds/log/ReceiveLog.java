@@ -17,4 +17,8 @@ public class ReceiveLog {
     private String senderUserId;
 
     private Long receivedMoney;
+
+    public ReceiveLog(Long receivedMoney) {
+        this.receivedMoney = receivedMoney;
+    }
 }

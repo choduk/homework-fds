@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
  * @author choduk88@sk.com
  * @since 2018. 1. 20..
  */
-public class SendMoneyLog {
+public class SendLog {
     private LocalDateTime createDt;
     private Long userId;
 
@@ -17,4 +17,8 @@ public class SendMoneyLog {
     private String receiverUserId;
 
     private Long sendedMoney;
+
+    public SendLog(Long sendedMoney) {
+        this.sendedMoney = sendedMoney;
+    }
 }
