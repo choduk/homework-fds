@@ -10,4 +10,8 @@ public class StringFieldPredicate extends FieldPredicate<String> {
     public StringFieldPredicate(String targetField, Operator<String> operator, String threshold) {
         super(targetField, operator, threshold);
     }
+
+    public StringFieldPredicate(String actionType, String targetField, Operator<String> operator, String threshold) {
+        super(actionType, targetField, operator, threshold);
+    }
 }

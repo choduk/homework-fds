@@ -5,6 +5,7 @@ import homework.fds.operator.Operator;
 
 import java.lang.reflect.Field;
 import java.util.Objects;
+import java.util.Optional;
 
 /**
  * @author choduk88@sk.com
@@ -12,11 +13,20 @@ import java.util.Objects;
  */
 public class FieldPredicate<T> implements ActionLogPredicate {
 
+    private final String actionType;
     private final String targetField;
     private final Operator<T> operator;
     private final T threshold;
 
     public FieldPredicate(String targetField, Operator<T> operator, T threshold) {
+        this.actionType = null;
+        this.targetField = Objects.requireNonNull(targetField);
+        this.operator = Objects.requireNonNull(operator);
+        this.threshold = Objects.requireNonNull(threshold);
+    }
+
+    public FieldPredicate(String actionType, String targetField, Operator<T> operator, T threshold) {
+        this.actionType = Objects.requireNonNull(actionType);
         this.targetField = Objects.requireNonNull(targetField);
         this.operator = Objects.requireNonNull(operator);
         this.threshold = Objects.requireNonNull(threshold);
@@ -26,6 +36,11 @@ public class FieldPredicate<T> implements ActionLogPredicate {
     public boolean test(ActionLog actionLog) {
 
         try {
+
+            if (!isTarget(actionLog))
+                return false;
+
+
             Object data = actionLog.getData();
             Field targetField = getField(data);
 
@@ -37,6 +52,13 @@ public class FieldPredicate<T> implements ActionLogPredicate {
         } catch (NoSuchFieldException | IllegalAccessException e) {
             throw new RuntimeException();
         }
+    }
+
+    private boolean isTarget(ActionLog actionLog) {
+        if (Objects.isNull(actionType))
+            return true;
+
+        return actionLog.isEqualToActionType(actionType);
     }
 
     private boolean isEqualsToClass(Field targetField) {

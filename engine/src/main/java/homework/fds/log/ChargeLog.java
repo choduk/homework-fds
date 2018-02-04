@@ -16,4 +16,8 @@ public class ChargeLog {
     public ChargeLog(Long chargingMoney) {
         this.chargingMoney = chargingMoney;
     }
+
+    public Long getChargingMoney() {
+        return chargingMoney;
+    }
 }

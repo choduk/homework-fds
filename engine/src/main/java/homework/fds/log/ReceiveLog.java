@@ -21,4 +21,8 @@ public class ReceiveLog {
     public ReceiveLog(Long receivedMoney) {
         this.receivedMoney = receivedMoney;
     }
+
+    public Long getReceivedMoney() {
+        return receivedMoney;
+    }
 }

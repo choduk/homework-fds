@@ -21,4 +21,8 @@ public class SendLog {
     public SendLog(Long sendedMoney) {
         this.sendedMoney = sendedMoney;
     }
+
+    public Long getSendedMoney() {
+        return sendedMoney;
+    }
 }
