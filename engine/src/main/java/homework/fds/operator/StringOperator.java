@@ -1,6 +1,4 @@
-package homework.fds.type;
-
-import homework.fds.operator.Operator;
+package homework.fds.operator;
 
 /**
  * @author choduk88@sk.com

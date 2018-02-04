@@ -7,7 +7,7 @@ import homework.fds.filter.PeriodFilter;
 import homework.fds.filter.AbstractLogFilter;
 import homework.fds.predicate.NumberFieldPredicate;
 import homework.fds.type.ActionType;
-import homework.fds.type.NumberOperator;
+import homework.fds.operator.NumberOperator;
 import homework.fds.validator.CountValidator;
 import homework.fds.validator.RuleValidator;
 import org.junit.Before;

@@ -2,8 +2,8 @@ package homework.fds.predicate;
 
 import homework.fds.log.ActionLog;
 import homework.fds.log.ServiceAccountOpenLog;
-import homework.fds.type.NumberOperator;
-import homework.fds.type.StringOperator;
+import homework.fds.operator.NumberOperator;
+import homework.fds.operator.StringOperator;
 import org.junit.Before;
 import org.junit.Test;
 

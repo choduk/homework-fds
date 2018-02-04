@@ -1,7 +1,7 @@
 package homework.fds.validator;
 
 import homework.fds.log.ActionLog;
-import homework.fds.type.NumberOperator;
+import homework.fds.operator.NumberOperator;
 
 import java.util.List;
 

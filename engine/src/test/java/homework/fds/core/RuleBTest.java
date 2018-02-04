@@ -4,7 +4,7 @@ import homework.fds.TestHelper;
 import homework.fds.filter.*;
 import homework.fds.predicate.NumberFieldPredicate;
 import homework.fds.type.ActionType;
-import homework.fds.type.NumberOperator;
+import homework.fds.operator.NumberOperator;
 import homework.fds.validator.CountValidator;
 import homework.fds.validator.RuleValidator;
 import org.junit.Before;

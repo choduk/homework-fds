@@ -1,4 +1,4 @@
-package homework.fds.type;
+package homework.fds.operator;
 
 import homework.fds.operator.Operator;
 

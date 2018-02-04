@@ -1,6 +1,6 @@
 package homework.fds.predicate;
 
-import homework.fds.type.NumberOperator;
+import homework.fds.operator.NumberOperator;
 
 import java.util.Objects;
 import java.util.function.Predicate;
