@@ -22,7 +22,15 @@ public class Rule {
     }
 
     public boolean isMatch(LogRawData logRawData) {
+
+        if(isEmpty(logRawData))
+            return false;
+
         LogRawData filteredLogRawData = logFilter.doFilter(logRawData);
         return validator.valid(filteredLogRawData.getActionLogList());
+    }
+
+    private boolean isEmpty(LogRawData logRawData) {
+        return Objects.isNull(logRawData) || logRawData.getActionLogList().isEmpty();
     }
 }
