@@ -51,7 +51,7 @@ public class RuleTest {
         // then
         assertThat(rule.isMatch(any())).isFalse();
     }
-    
+
     @Test
     public void success__when__validator__return__true() throws Exception {
         // given when
