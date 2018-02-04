@@ -18,17 +18,25 @@ public class LogRawData {
     private final LocalDateTime currentTime;
 
     public LogRawData(List<ActionLog> actionLogList, LocalDateTime currentTime) {
-        this.actionLogList = actionLogList;
+        this.actionLogList = actionLogList.stream()
+                                          .sorted(Comparator.comparing(ActionLog::getCreateDt))
+                                          .collect(toList());
         this.currentTime = currentTime;
     }
 
+    public LogRawData(List<ActionLog> actionLogList) {
+        this.actionLogList = actionLogList.stream()
+                                          .sorted(Comparator.comparing(ActionLog::getCreateDt))
+                                          .collect(toList());
+        this.currentTime = LocalDateTime.now();
+    }
+
     public List<ActionLog> getActionLogList() {
-        return actionLogList.stream()
-                .sorted(Comparator.comparing(ActionLog::getCreateDt))
-                .collect(toList());
+        return actionLogList;
     }
 
     public LocalDateTime getCurrentTime() {
         return currentTime;
     }
+
 }
