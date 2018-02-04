@@ -3,8 +3,10 @@ package homework.fds.core;
 import homework.fds.log.ActionLog;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 import static java.util.stream.Collectors.toList;
 
@@ -18,16 +20,19 @@ public class LogRawData {
     private final LocalDateTime currentTime;
 
     public LogRawData(List<ActionLog> actionLogList, LocalDateTime currentTime) {
-        this.actionLogList = actionLogList.stream()
-                                          .sorted(Comparator.comparing(ActionLog::getCreateDt))
-                                          .collect(toList());
+
+        this.actionLogList = Optional.of(actionLogList).orElse(Collections.emptyList())
+                                     .stream()
+                                     .sorted(Comparator.comparing(ActionLog::getCreateDt))
+                                     .collect(toList());
         this.currentTime = currentTime;
     }
 
     public LogRawData(List<ActionLog> actionLogList) {
-        this.actionLogList = actionLogList.stream()
-                                          .sorted(Comparator.comparing(ActionLog::getCreateDt))
-                                          .collect(toList());
+        this.actionLogList = Optional.of(actionLogList).orElse(Collections.emptyList())
+                                     .stream()
+                                     .sorted(Comparator.comparing(ActionLog::getCreateDt))
+                                     .collect(toList());
         this.currentTime = LocalDateTime.now();
     }
 
